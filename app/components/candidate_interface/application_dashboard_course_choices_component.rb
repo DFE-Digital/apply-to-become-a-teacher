@@ -201,10 +201,13 @@ module CandidateInterface
 
     def application_choices_with_accepted_states
       @application_form
-        .application_choices
-        .includes(:course, :site, :provider, :current_course, :current_course_option, :interviews)
-        .order(id: :asc)
-        .select { |ac| ac.status.to_sym.in?(ApplicationStateChange::ACCEPTED_STATES) }
+        .candidate
+        .application_forms
+        .includes(application_choices: [:course, :site, :provider, :current_course, :current_course_option, :interviews])
+        .map(&:application_choices)
+        .flatten
+        .sort_by(&:id)
+        .select { |ac| ac.status.to_sym.in?(ApplicationStateChange::ACCEPTED_STATES + ApplicationStateChange::INTERVIEWABLE_STATES + [:offer]) }
     end
 
     def all_application_choices
@@ -215,7 +218,7 @@ module CandidateInterface
     end
 
     def application_choice_with_accepted_state_present?
-      @application_form.application_choices.any? { |ac| ApplicationStateChange::ACCEPTED_STATES.include?(ac.status.to_sym) }
+      @application_form.candidate.application_forms.map(&:application_choices).flatten.any? { |ac| (ApplicationStateChange::ACCEPTED_STATES + ApplicationStateChange::INTERVIEWABLE_STATES + [:offer]).include?(ac.status.to_sym) }
     end
   end
 end

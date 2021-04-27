@@ -74,7 +74,7 @@ Rails.application.routes.draw do
       post '/submit' => 'unsubmitted_application_form#submit', as: :application_submit
 
       get '/complete' => 'submitted_application_form#complete', as: :application_complete
-      get '/review/submitted' => 'submitted_application_form#review_submitted', as: :application_review_submitted
+      get '/review/submitted/(:id)' => 'submitted_application_form#review_submitted', as: :application_review_submitted
 
       get '/review/submitted/:id' => 'application_form#review_previous_application', as: :review_previous_application
       post '/apply-again' => 'submitted_application_form#apply_again', as: :apply_again

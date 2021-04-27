@@ -1,7 +1,7 @@
 module CandidateInterface
   class SubmittedApplicationFormController < CandidateInterfaceController
     def review_submitted
-      @application_form = current_application
+      @application_form = ApplicationForm.find_by(id: params[:id]) || current_application
     end
 
     def complete
