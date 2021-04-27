@@ -24,7 +24,7 @@ class Candidate < ApplicationRecord
 
   def current_application
     application_form = application_forms.order(:created_at).last
-    application_form ||= application_forms.create!
+    application_form ||= application_forms.create!(phase: 'apply_2')
     application_form
   end
 
