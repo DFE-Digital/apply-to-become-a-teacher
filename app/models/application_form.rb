@@ -113,6 +113,10 @@ class ApplicationForm < ApplicationRecord
       .first
   end
 
+  def draft?
+    !submitted?
+  end
+
   def qualification_in_subject(level, subject)
     if subject.to_s == ApplicationQualification::SCIENCE
       # A Science GCSE may have any one of the following subject variants
