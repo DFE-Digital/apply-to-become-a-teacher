@@ -1,4 +1,29 @@
-<% application_choices.each do |application_choice| %>
+<h2 class="govuk-heading-m">Pending applications</h1>
+<% (application_choices - application_choices_with_failed_states).each do |application_choice| %>
+
+  <div class="<%= container_class(application_choice) %>" id="course-choice-<%= application_choice.id %>" data-qa="application-choice-<%= application_choice.id %>">
+  <%= render(SummaryCardComponent.new(rows: course_choice_rows(application_choice), editable: @editable)) do %>
+    <%= render(SummaryCardHeaderComponent.new(
+      title: title_for(application_choice),
+      heading_level: @heading_level,
+    )) do %>
+      <div class="app-summary-card__actions">
+        <%= govuk_link_to 'View application', candidate_interface_application_review_submitted_path %>
+        <% if !application_choice.offer? && !withdrawable?(application_choice) && @editable %>
+          <%= govuk_link_to candidate_interface_confirm_destroy_course_choice_path(application_choice.id), data: { action: :delete } do %>
+            <%= t('application_form.courses.delete') %>
+            <span class="govuk-visually-hidden"> <%= application_choice.current_course.name_and_code %></span>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  </div>
+<% end %>
+
+<h2 class="govuk-heading-m">Unsuccessful applications</h1>
+<% application_choices_with_failed_states.each do |application_choice| %>
+
   <div class="<%= container_class(application_choice) %>" id="course-choice-<%= application_choice.id %>" data-qa="application-choice-<%= application_choice.id %>">
   <%= render(SummaryCardComponent.new(rows: course_choice_rows(application_choice), editable: @editable)) do %>
     <%= render(SummaryCardHeaderComponent.new(

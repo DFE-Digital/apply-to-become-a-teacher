@@ -214,6 +214,14 @@ module CandidateInterface
         .order(id: :asc)
     end
 
+    def application_choices_with_failed_states
+      @application_form
+        .application_choices
+        .includes(:course, :site, :provider, :current_course, :current_course_option, :interviews)
+        .order(id: :asc)
+        .select { |ac| ac.status.to_sym.in?(ApplicationStateChange::UNSUCCESSFUL_END_STATES) }
+    end
+
     def application_choice_with_accepted_state_present?
       @application_form.application_choices.any? { |ac| ApplicationStateChange::ACCEPTED_STATES.include?(ac.status.to_sym) }
     end
