@@ -1,12 +1,12 @@
 <h2 class="govuk-heading-m">Pending applications</h1>
-<% (application_choices - application_choices_with_failed_states).each do |application_choice| %>
-
+<% pending_choices = (application_choices - application_choices_with_failed_states)  %>
+<% pending_choices.each do |application_choice| %>
   <div class="<%= container_class(application_choice) %>" id="course-choice-<%= application_choice.id %>" data-qa="application-choice-<%= application_choice.id %>">
-  <%= render(SummaryCardComponent.new(rows: course_choice_rows(application_choice), editable: @editable)) do %>
-    <%= render(SummaryCardHeaderComponent.new(
-      title: title_for(application_choice),
-      heading_level: @heading_level,
-    )) do %>
+    <%= render(SummaryCardComponent.new(rows: course_choice_rows(application_choice), editable: @editable)) do %>
+      <%= render(SummaryCardHeaderComponent.new(
+        title: title_for(application_choice),
+        heading_level: @heading_level,
+      )) do %>
       <div class="app-summary-card__actions">
         <%= govuk_link_to 'View application', candidate_interface_application_review_submitted_path %>
         <% if !application_choice.offer? && !withdrawable?(application_choice) && @editable %>
@@ -21,15 +21,27 @@
   </div>
 <% end %>
 
+<% remaining_choices = 3 - pending_choices.size %>
+<% if remaining_choices.positive? %>
+  <% remaining_choices.times do %>
+    <div class="app-card app-card--outline govuk-!-margin-bottom-5">
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Application choice available</h3>
+
+      <p class='govuk-body'>
+      <%= govuk_link_to 'Apply to another course', candidate_interface_course_choices_add_replacement_path %>
+      </p>
+    </div>
+  <% end %>
+<% end %>
+
 <h2 class="govuk-heading-m">Unsuccessful applications</h1>
 <% application_choices_with_failed_states.each do |application_choice| %>
-
   <div class="<%= container_class(application_choice) %>" id="course-choice-<%= application_choice.id %>" data-qa="application-choice-<%= application_choice.id %>">
-  <%= render(SummaryCardComponent.new(rows: course_choice_rows(application_choice), editable: @editable)) do %>
-    <%= render(SummaryCardHeaderComponent.new(
-      title: title_for(application_choice),
-      heading_level: @heading_level,
-    )) do %>
+    <%= render(SummaryCardComponent.new(rows: course_choice_rows(application_choice), editable: @editable)) do %>
+      <%= render(SummaryCardHeaderComponent.new(
+        title: title_for(application_choice),
+        heading_level: @heading_level,
+      )) do %>
       <div class="app-summary-card__actions">
         <%= govuk_link_to 'View application', candidate_interface_application_review_submitted_path %>
         <% if !application_choice.offer? && !withdrawable?(application_choice) && @editable %>
