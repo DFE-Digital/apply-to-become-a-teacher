@@ -24,7 +24,7 @@ module CandidateInterface
     end
 
     def course_name_and_code_for(application_choice)
-      application_choice.course.name_and_code
+      application_choice.course.name
     end
 
   private

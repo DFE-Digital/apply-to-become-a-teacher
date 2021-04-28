@@ -14,6 +14,17 @@ module CandidateInterface
       title
     end
 
+    def application_choices_with_accepted_states
+      @application_form
+        .candidate
+        .application_forms
+        .includes(application_choices: [:course, :site, :provider, :current_course, :current_course_option, :interviews])
+        .map(&:application_choices)
+        .flatten
+        .sort_by(&:id)
+        .select { |ac| ac.status.to_sym.in?(ApplicationStateChange::ACCEPTED_STATES + ApplicationStateChange::INTERVIEWABLE_STATES + [:offer]) }
+    end
+
   private
 
     def has_multiple_choices?

@@ -1,19 +1,15 @@
-<%= govuk_inset_text(classes: 'govuk-!-margin-top-0') do %>
-  <h2 class="govuk-heading-m"><%= title %></h2>
   <% if @candidate.current_application.draft? %>
-    <%= govuk_link_to(
+    <%= govuk_button_to(
       'View current draft application',
       candidate_interface_application_form_path,
-      class: 'govuk-!-margin-bottom-0',
+      class: 'govuk-!-margin-bottom-5', method: :get,
     ) %>
   <% else %>
-    <p class="govuk-body">If now’s the right time, you can still apply for courses that start this academic year.</p>
-    <p class="govuk-body">We will copy your application form. You will be able to make amendments and apply to another course.</p>
+    <p class="govuk-body">You can have up to 5 applications in progress at any one time.</p>
 
     <%= govuk_button_to(
       'Start another application',
       candidate_interface_apply_again_path,
-      class: 'govuk-!-margin-bottom-0',
+      class: 'govuk-!-margin-bottom-5',
     ) %>
   <% end %>
-<% end %>

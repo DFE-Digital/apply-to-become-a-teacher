@@ -1,12 +1,12 @@
 
-<h1 class="govuk-heading-xl"><%= title %></h1>
-
-<h2 class="govuk-heading-m">Equality and diversity questionnaire</h2>
-<%= govuk_link_to 'Complete', candidate_interface_start_equality_and_diversity_path, button: true %>
-
+<h1 class="govuk-heading-l"><%= title %></h1>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+  <% if application_choices_with_accepted_states.count >= 5 %>
+    <p class="govuk-body">You cannot currently start another application because you already have 5 applications in progress.</p>
+  <% else %>
     <%= render CandidateInterface::StartOrLinkToNewApplication.new(candidate: @application_form.candidate) %>
+  <% end %>
     <%= render(CandidateInterface::ApplicationDashboardCourseChoicesComponent.new(application_form: @application_form, editable: false, heading_level: 3, show_status: true, render_link_to_find_when_rejected_on_qualifications: true, display_accepted_application_choices: true)) %>
 
     <% unless @application_form.candidate.application_forms.map(&:application_choices).flatten.all? { |ac| ApplicationStateChange::UNSUCCESSFUL_END_STATES.include?(ac.status.to_sym) }%>
@@ -15,10 +15,10 @@
   </div>
 </div>
 
-<h2 class="govuk-heading-m">Feedback form</h2>
-<%= govuk_link_to 'Complete', candidate_interface_feedback_form_path, button: true %>
+<h2 class="govuk-heading-m">Complete equality and diversity questionnaire</h2>
+<p class="govuk-body">Help us improve the service giving us these details.</p>
+<%= govuk_link_to 'Start questionnaire', candidate_interface_start_equality_and_diversity_path, button: true, class: 'govuk-button--secondary' %>
 
-<h2 class="govuk-heading-m">Updating your contact information</h2>
-<p class="govuk-body">
-  To update your contact information, email us at <%= bat_contact_mail_to %>.
-</p>
+<h2 class="govuk-heading-m">Give feedback</h2>
+<p class="govuk-body">Help us improve the service by telling us about your experience</p>
+<%= govuk_link_to 'Give feedback', candidate_interface_feedback_form_path, button: true, class: 'govuk-button--secondary' %>
