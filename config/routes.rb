@@ -357,6 +357,9 @@ Rails.application.routes.draw do
         get '/another' => 'course_choices/add_another_course#ask', as: :course_choices_add_another_course
         post '/another' => 'course_choices/add_another_course#decide', as: :course_choices_add_another_course_selection
 
+        get '/replacement' => 'course_choices/add_replacement_course#new', as: :course_choices_add_replacement
+        post '/replacement' => 'course_choices/add_replacement_course#create'
+
         get '/apply-on-ucas/provider/:provider_id' => 'course_choices/ucas#no_courses', as: :course_choices_ucas_no_courses
         get '/apply-on-ucas/provider/:provider_id/course/:course_id' => 'course_choices/ucas#with_course', as: :course_choices_ucas_with_course
 

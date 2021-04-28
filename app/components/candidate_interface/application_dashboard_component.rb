@@ -16,6 +16,17 @@ module CandidateInterface
 
   private
 
+    def can_add_another_choice?
+      @application_form.application_choices.any? do |c|
+        if c.rejected?
+          reasons = ReasonsForRejection.new(c.structured_rejection_reasons)
+          reasons.course_full_y_n == 'Yes'
+        else
+          false
+        end
+      end
+    end
+
     def has_multiple_choices?
       @application_form.application_choices.size > 1
     end

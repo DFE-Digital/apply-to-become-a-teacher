@@ -4,6 +4,13 @@
 
 <h1 class="govuk-heading-xl"><%= title %></h1>
 
+<%= govuk_inset_text do %>
+<% if can_add_another_choice? %>
+  <p>One of your choices was unsuccessful because the course is full.</p>
+  <%= govuk_link_to 'Apply to an alternative course', candidate_interface_course_choices_add_replacement_path, button: true %>
+<% end %>
+<% end %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <%= render(CandidateInterface::ApplicationDashboardGuidanceComponent.new(application_form: @application_form)) %>
