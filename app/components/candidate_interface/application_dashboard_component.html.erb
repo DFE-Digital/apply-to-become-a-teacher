@@ -1,18 +1,24 @@
 
 <h1 class="govuk-heading-xl"><%= title %></h1>
 
+<h2 class="govuk-heading-m">Equality and diversity questionnaire</h2>
+<%= govuk_link_to 'Complete', candidate_interface_start_equality_and_diversity_path, button: true %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <%= render CandidateInterface::StartOrLinkToNewApplication.new(candidate: @application_form.candidate) %>
     <%= render(CandidateInterface::ApplicationDashboardCourseChoicesComponent.new(application_form: @application_form, editable: false, heading_level: 3, show_status: true, render_link_to_find_when_rejected_on_qualifications: true, display_accepted_application_choices: true)) %>
-
-    <h2 class="govuk-heading-m">Updating your contact information</h2>
-    <p class="govuk-body">
-      To update your contact information, email us at <%= bat_contact_mail_to %>.
-    </p>
 
     <% unless @application_form.candidate.application_forms.map(&:application_choices).flatten.all? { |ac| ApplicationStateChange::UNSUCCESSFUL_END_STATES.include?(ac.status.to_sym) }%>
       <%= render(CandidateInterface::PreviousApplicationsComponent.new(candidate: @application_form.candidate)) %>
     <% end %>
   </div>
 </div>
+
+<h2 class="govuk-heading-m">Feedback form</h2>
+<%= govuk_link_to 'Complete', candidate_interface_feedback_form_path, button: true %>
+
+<h2 class="govuk-heading-m">Updating your contact information</h2>
+<p class="govuk-body">
+  To update your contact information, email us at <%= bat_contact_mail_to %>.
+</p>
