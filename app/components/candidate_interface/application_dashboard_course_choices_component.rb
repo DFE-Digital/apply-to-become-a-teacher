@@ -218,7 +218,7 @@ module CandidateInterface
     end
 
     def application_choices_with_offer
-      @application_form.candidate.application_forms.map(&:application_choices).flatten.select(&:offer)
+      @application_form.candidate.application_forms.map(&:application_choices).flatten.select(&:offer).reject { |ac| [:declined].include?(ac.status.to_sym) }
     end
 
     def application_choices_awaiting_provider_decision
