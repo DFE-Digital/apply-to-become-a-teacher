@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m">Pending applications</h1>
+<h2 class="govuk-heading-m">Active applications</h1>
 <% pending_choices = (application_choices - application_choices_with_failed_states)  %>
 <% pending_choices.each do |application_choice| %>
   <div class="<%= container_class(application_choice) %>" id="course-choice-<%= application_choice.id %>" data-qa="application-choice-<%= application_choice.id %>">
@@ -24,11 +24,10 @@
 <% remaining_choices = 3 - pending_choices.size %>
 <% if remaining_choices.positive? %>
   <% remaining_choices.times do %>
-    <div class="app-card app-card--outline govuk-!-margin-bottom-5">
-      <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Application choice available</h3>
-
-      <p class='govuk-body'>
-      <%= govuk_link_to 'Apply to another course', candidate_interface_course_choices_add_replacement_path %>
+    <div class="app-card govuk-!-margin-bottom-6">
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-1">You have <%= remaining_choices %> application choices available</h3>
+      <p class="govuk-body govuk-!-margin-bottom-0">
+        <%= govuk_link_to 'Apply to another course', candidate_interface_course_choices_add_replacement_path %>
       </p>
     </div>
   <% end %>
