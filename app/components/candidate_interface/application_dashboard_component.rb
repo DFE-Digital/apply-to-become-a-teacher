@@ -18,11 +18,22 @@ module CandidateInterface
       @application_form
         .candidate
         .application_forms
-        .includes(application_choices: [:course, :site, :provider, :current_course, :current_course_option, :interviews])
+        .includes(application_choices: %i[course site provider current_course current_course_option interviews])
         .map(&:application_choices)
         .flatten
         .sort_by(&:id)
         .select { |ac| ac.status.to_sym.in?(ApplicationStateChange::ACCEPTED_STATES + ApplicationStateChange::INTERVIEWABLE_STATES + [:offer]) }
+    end
+
+    def application_choices_with_recruited_states
+      @application_form
+        .candidate
+        .application_forms
+        .includes(application_choices: %i[course site provider current_course current_course_option interviews])
+        .map(&:application_choices)
+        .flatten
+        .sort_by(&:id)
+        .select { |ac| ac.status.to_sym.in?(ApplicationStateChange::RECRUITED_STATES) }
     end
 
   private

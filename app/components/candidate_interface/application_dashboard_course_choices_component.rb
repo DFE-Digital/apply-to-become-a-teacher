@@ -203,7 +203,7 @@ module CandidateInterface
       @application_form
         .candidate
         .application_forms
-        .includes(application_choices: [:course, :site, :provider, :current_course, :current_course_option, :interviews])
+        .includes(application_choices: %i[course site provider current_course current_course_option interviews])
         .map(&:application_choices)
         .flatten
         .sort_by(&:id)
@@ -218,11 +218,11 @@ module CandidateInterface
     end
 
     def application_choices_with_offer
-      @application_form.candidate.application_forms.map(&:application_choices).flatten.select(&:offer).reject { |ac| [:declined].include?(ac.status.to_sym) }
+      @application_form.candidate.application_forms.map(&:application_choices).flatten.select { |ac| ac.status == 'offer' }
     end
 
     def application_choices_awaiting_provider_decision
-      @application_form.candidate.application_forms.map(&:application_choices).flatten.select(&:awaiting_provider_decision?)
+      @application_form.candidate.application_forms.map(&:application_choices).flatten.select { |ac| ac.status == 'interviewing' || ac.status == 'awaiting_provider_decision' }
     end
   end
 end

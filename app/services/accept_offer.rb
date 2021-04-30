@@ -34,15 +34,20 @@ private
 
   def other_application_choices_with_offers
     @application_choice
-      .self_and_siblings
-      .offer
-      .where.not(id: @application_choice.id)
+      .candidate
+      .application_forms
+      .map(&:application_choices)
+      .flatten
+      .select { |ac| ac.status == 'offer' }
   end
 
   def application_choices_awaiting_provider_decision
     @application_choice
-      .self_and_siblings
-      .decision_pending
+      .candidate
+      .application_forms
+      .map(&:application_choices)
+      .flatten
+      .select { |ac| ac.status == 'awaiting_provider_decision' || ac.status == 'interviewing' }
   end
 
   def unconditional_offer?

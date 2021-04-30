@@ -41,7 +41,7 @@ en:
       description: This application is in a state that we do not recognise. Please report this to a developer.
   candidate_application_states:
     awaiting_provider_decision: Awaiting decision
-    interviewing: Awaiting decision
+    interviewing: Interviewing
     cancelled: Application cancelled
     declined: Offer declined
     offer: Offer received

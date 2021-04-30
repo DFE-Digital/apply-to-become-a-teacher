@@ -1,8 +1,10 @@
 
 <h1 class="govuk-heading-l"><%= title %></h1>
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-  <% if application_choices_with_accepted_states.count >= 5 %>
+  <div class="govuk-grid-column-three-quarters">
+  <% if application_choices_with_recruited_states.any? %>
+    <p class="govuk-body">Congratulations on your offer.</p>
+  <% elsif application_choices_with_accepted_states.count >= 5 %>
     <p class="govuk-body">You cannot currently start another application because you already have 5 applications in progress.</p>
   <% else %>
     <%= render CandidateInterface::StartOrLinkToNewApplication.new(candidate: @application_form.candidate) %>
@@ -16,7 +18,7 @@
 </div>
 
 <h2 class="govuk-heading-m">Complete equality and diversity questionnaire</h2>
-<p class="govuk-body">Help us improve the service giving us these details.</p>
+<p class="govuk-body">You can help us improve the service by telling us more about you.</p>
 <%= govuk_link_to 'Start questionnaire', candidate_interface_start_equality_and_diversity_path, button: true, class: 'govuk-button--secondary' %>
 
 <h2 class="govuk-heading-m">Give feedback</h2>

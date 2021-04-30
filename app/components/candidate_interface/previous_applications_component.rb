@@ -11,7 +11,7 @@ module CandidateInterface
     end
 
     def application_choices
-      (eligible_application_choices)
+      eligible_application_choices
         .compact
         .sort_by(&:id)
         .reverse

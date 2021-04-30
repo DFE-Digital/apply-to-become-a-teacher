@@ -12,6 +12,7 @@ class ApplicationStateChange
   SUCCESSFUL_STATES = %i[pending_conditions offer offer_deferred recruited].freeze
   DECISION_PENDING_STATUSES = %i[awaiting_provider_decision interviewing].freeze
   TERMINAL_STATES = UNSUCCESSFUL_END_STATES + %i[recruited].freeze
+  RECRUITED_STATES = %i[pending_conditions offer_deferred recruited].freeze
 
   attr_reader :application_choice
 

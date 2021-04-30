@@ -77,7 +77,13 @@ module CandidateInterface
   private
 
     def set_application_choice
-      @application_choice = @current_application.application_choices.find(params[:id])
+      @application_choice = @current_application
+        .candidate
+        .application_forms
+        .map(&:application_choices)
+        .flatten
+        .select { |ac| ac.id == params[:id].to_i }
+        .first
     end
 
     def single_application_choice?
