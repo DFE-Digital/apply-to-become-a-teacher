@@ -1,0 +1,67 @@
+<% content_for :title, 'Transition to Apply' %>
+
+<% content_for :before_content do %>
+  <%= breadcrumbs({
+    'Performance': support_interface_performance_path,
+    'Transition progress': nil,
+  }) %>
+<% end %>
+
+<div class="govuk-grid-row govuk-!-margin-bottom-6">
+  <div class="govuk-grid-column-full">
+  </div>
+
+  <div class="govuk-grid-column-one-half">
+    <h1 class="govuk-heading-xl govuk-!-font-size-80 govuk-!-margin-bottom-0"><%= @dashboard.business_days_til_end_of_cycle %></h1>
+    <p class="govuk-body">working days until end of cycle</p>
+
+    <h1 class="govuk-heading-xl govuk-!-font-size-80 govuk-!-margin-bottom-0"><%= @dashboard.percent_onboarded %>%</h1>
+    <p class="govuk-body">of providers onboarded (<%= number_with_delimiter(@dashboard.total_onboarded) %> out of <%= number_with_delimiter(@dashboard.total_providers) %>)</p>
+
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">Recently onboarded</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Provider</th>
+          <th scope="col" class="govuk-table__header">Signed DSA on</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <% @dashboard.last_5_onboarded.each do |p| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><%= p.name %></td>
+            <td class="govuk-table__cell"><%= p.dsa_date.to_s(:govuk_date) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="govuk-grid-column-one-half">
+    <% onboarded, total = @dashboard.universities %>
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Universities</h2>
+        <%= render SupportInterface::TileComponent.new(count: number_with_delimiter(onboarded), label: "out of #{number_with_delimiter(total)} onboarded", colour: :blue) %>
+      </div>
+    </div>
+
+    <% onboarded, total = @dashboard.scitts %>
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">SCITTs</h2>
+        <%= render SupportInterface::TileComponent.new(count: number_with_delimiter(onboarded), label: "out of #{number_with_delimiter(total)} onboarded", colour: :blue) %>
+      </div>
+    </div>
+
+    <% onboarded, total = @dashboard.school_directs %>
+    <div class="govuk-grid-row govuk-!-margin-bottom-6">
+      <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">School directs</h2>
+        <%= render SupportInterface::TileComponent.new(count: number_with_delimiter(onboarded), label: "out of #{number_with_delimiter(total)} onboarded", colour: :blue) %>
+      </div>
+    </div>
+
+    <p class="govuk-body">Provider totals by type are based on provider types in Publish and are not guaranteed to be accurate</p>
+  </div>
+</div>

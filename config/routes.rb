@@ -880,6 +880,7 @@ Rails.application.routes.draw do
       get '/reasons-for-rejection/application-choices' => 'performance#reasons_for_rejection_application_choices', as: :reasons_for_rejection_application_choices
       get '/service' => 'performance#service_performance_dashboard', as: :service_performance_dashboard
       get '/ucas-matches' => 'performance#ucas_matches_dashboard', as: :ucas_matches_dashboard
+      get '/transition' => 'performance#transition_dashboard', as: :transition_dashboard
 
       get '/course-options', to: 'performance#course_options', as: :course_options
       get '/unavailable-choices' => 'performance#unavailable_choices', as: :unavailable_choices

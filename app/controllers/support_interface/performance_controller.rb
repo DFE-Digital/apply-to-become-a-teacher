@@ -33,5 +33,9 @@ module SupportInterface
     def unavailable_choices
       @monitor = SupportInterface::ApplicationMonitor.new
     end
+
+    def transition_dashboard
+      @dashboard = SupportInterface::TransitionDashboard.new
+    end
   end
 end
