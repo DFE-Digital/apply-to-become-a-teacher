@@ -32,6 +32,7 @@ class FeatureFlag
     [:content_security_policy, 'Enables the content security policy declared in `config/initializers/content_security_policy.rb`', 'Steve Hook'],
     [:support_user_reinstate_offer, 'Allows a support users to reinstate a declined course choice offer', 'James Glenn'],
     [:expanded_quals_export, 'Rework the Qualifications export to contain all candidate qualifications', 'Malcolm Baig'],
+    [:select_references, 'Allow the candidate to select two from many feedback provided references', 'David Gisbey'],
   ].freeze
 
   FEATURES = (PERMANENT_SETTINGS + TEMPORARY_FEATURE_FLAGS).map { |name, description, owner|
