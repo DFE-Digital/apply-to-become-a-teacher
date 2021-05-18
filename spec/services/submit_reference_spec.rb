@@ -21,7 +21,7 @@ RSpec.describe SubmitReference do
     end
 
     context 'when the second reference is received' do
-      it 'cancels reference requests for all remaining "awaiting_feedback" references' do
+      it 'cancels reference requests for all remaining "awaiting_feedback" references and sets references_completed to true' do
         application_form = create(:application_form)
         reference1 = create(:reference, :feedback_requested, application_form: application_form)
         reference2 = create(:reference, :feedback_requested, application_form: application_form)
@@ -35,6 +35,7 @@ RSpec.describe SubmitReference do
         expect(reference2).to be_feedback_provided
         expect(reference3.reload).to be_feedback_refused
         expect(reference4.reload).to be_cancelled
+        expect(application_form.reload.references_completed).to eq true
       end
     end
   end

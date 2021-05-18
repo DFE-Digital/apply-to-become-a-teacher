@@ -67,6 +67,7 @@ module CandidateInterface
         end
 
         @reference.destroy!
+
         redirect_to_review_page
       end
 

@@ -313,7 +313,7 @@ module CandidateInterface
     end
 
     def enough_references_provided?
-      @application_form.enough_references_have_been_provided?
+      @application_form.references_complete
     end
 
     def references_in_progress?

@@ -10,6 +10,10 @@ class SubmitReference
   def save!
     @reference.update!(feedback_status: :feedback_provided, feedback_provided_at: Time.zone.now)
 
+    if @reference.application_form.enough_references_have_been_provided?
+      @reference.update!(references_complete: true)
+    end
+
     cancel_feedback_requested_references if enough_references_have_been_provided?
 
     if @send_emails
