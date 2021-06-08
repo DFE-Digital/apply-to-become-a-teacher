@@ -18,13 +18,17 @@ class SummaryListComponent < ViewComponent::Base
 
   def action(row)
     if row[:change_path]
-      govuk_link_to(row[:change_path], class: 'govuk-!-display-none-print') do
-        "Change<span class=\"govuk-visually-hidden\"> #{row[:action]}</span>".html_safe
-      end
+      {
+        href: row[:change_path],
+        visually_hidden_text: row[:action],
+        classes: 'govuk-!-display-none-print',
+      }
     elsif row[:action_path]
-      govuk_link_to(row[:action], row[:action_path], class: 'govuk-!-display-none-print')
-    elsif any_row_has_action_span?
-      tag.dd(class: 'govuk-summary-list__actions')
+      {
+        href: row[:action_path],
+        text: row[:action],
+        classes: 'govuk-!-display-none-print',
+      }
     end
   end
 
@@ -39,9 +43,5 @@ private
         value: value,
       }
     end
-  end
-
-  def any_row_has_action_span?
-    rows.select { |row| row.key?(:action) }.any?
   end
 end

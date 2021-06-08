@@ -20,7 +20,7 @@ gem 'blazer'
 gem 'tzinfo-data'
 
 gem 'webpacker'
-gem 'govuk-components'
+gem 'govuk-components', '2.0.0b5'
 gem 'govuk_design_system_formbuilder', '~> 2.7.1'
 
 # GOV.UK Notify
