@@ -9,7 +9,10 @@ def set_headers(api_key)
   ]
 end
 
+# Expected Oct usage per hour:
+#   71 SRS systems polling every hour for 90 days of data
 test do
+  # Section below must have 71 api keys, each belonging to a different provider
   %w[
     Xp9jU2_2BeDqsRP8Yy8C
   ].each do |api_key|
