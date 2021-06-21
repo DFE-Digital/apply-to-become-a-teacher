@@ -19,7 +19,7 @@ RUN cd /opt && \
 COPY jmeter-prometheus-plugin-0.6.0.jar ./
 RUN mv jmeter-prometheus-plugin-0.6.0.jar ${JMETER_PATH}/lib/ext
 
-EXPOSE 9270
+EXPOSE 8080
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
