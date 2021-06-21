@@ -36,6 +36,26 @@ resource "cloudfoundry_app" "jmeter_app" {
   }
 }
 
+data "cloudfoundry_app" "jmeter_app" {
+  depends_on = [cloudfoundry_app.jmeter_app]
+  name_or_id = cloudfoundry_app.jmeter_app.name
+  space      = data.cloudfoundry_space.space.id
+}
+
+data "cloudfoundry_app" "prometheus_app" {
+  name_or_id = var.prometheus_app
+  space      = data.cloudfoundry_space.space.id
+}
+
+resource "cloudfoundry_network_policy" "prometheus_policy" {
+  depends_on = [data.cloudfoundry_app.jmeter_app]
+  policy {
+    source_app      = data.cloudfoundry_app.prometheus_app.id
+    destination_app = data.cloudfoundry_app.jmeter_app.id
+    port            = "8080"
+  }
+}
+
 resource "cloudfoundry_route" "jmeter_app_internal_route" {
   domain   = data.cloudfoundry_domain.internal.id
   space    = data.cloudfoundry_space.space.id
