@@ -82,13 +82,12 @@ test do
       visit name: 'See interview schedule', url: BASEURL + '/provider/interview-schedule'
       think_time 3000
       visit name: 'See past interview schedule', url: BASEURL + '/provider/interview-schedule/past'
-      think_time 60000
     end
 
     # See provider activity log
     threads count: 1, continue_forever: true, duration: 3600 do
       log_in uid
-      think_time 60000
+      think_time 10000
       visit name: 'Load activity log', url: BASEURL + '/provider/activity'
     end
 
@@ -103,4 +102,4 @@ test do
       visit name: 'Download provider data export', url: BASEURL + '/provider/applications/data-export?provider_interface_application_data_export_form%5Brecruitment_cycle_years%5D%5B%5D=&provider_interface_application_data_export_form%5Brecruitment_cycle_years%5D%5B%5D=2021&provider_interface_application_data_export_form%5Brecruitment_cycle_years%5D%5B%5D=2020&provider_interface_application_data_export_form%5Bapplication_status_choice%5D=all&provider_interface_application_data_export_form%5Bstatuses%5D%5B%5D=&provider_interface_application_data_export_form%5Bprovider_ids%5D%5B%5D=&provider_interface_application_data_export_form%5Bprovider_ids%5D%5B%5D=${provider_id}&commit=Export+data+%28CSV%29'
     end
   end
-end.run
+end.jmx
