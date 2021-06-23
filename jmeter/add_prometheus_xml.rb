@@ -132,27 +132,27 @@ d Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="app" elementType="Argument">
             <stringProp name="Argument.name">app</stringProp>
-            <stringProp name="Argument.value">${__P(vcap_name,)}</stringProp>
+            <stringProp name="Argument.value">${__P(app,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="guid" elementType="Argument">
             <stringProp name="Argument.name">guid</stringProp>
-            <stringProp name="Argument.value">${__P(vcap_guid,)}</stringProp>
+            <stringProp name="Argument.value">${__P(guid,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="exported_instance" elementType="Argument">
             <stringProp name="Argument.name">exported_instance</stringProp>
-            <stringProp name="Argument.value">${__P(cf_instance,)}</stringProp>
+            <stringProp name="Argument.value">${__P(exported_instance,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="organisation" elementType="Argument">
             <stringProp name="Argument.name">organisation</stringProp>
-            <stringProp name="Argument.value">${__P(vcap_org,)}</stringProp>
+            <stringProp name="Argument.value">${__P(organisation,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="space" elementType="Argument">
             <stringProp name="Argument.name">space</stringProp>
-            <stringProp name="Argument.value">${__P(vcap_space,)}</stringProp>
+            <stringProp name="Argument.value">${__P(space,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
