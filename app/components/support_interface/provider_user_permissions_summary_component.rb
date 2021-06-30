@@ -16,15 +16,17 @@ module SupportInterface
         {
           key: permission.provider.name_and_code,
           value: render(SupportInterface::PermissionsListComponent.new(permission)),
-          action: 'permissions',
-          change_path: change_path,
+          action: {
+            href: action_path,
+            visually_hidden_text: 'permissions',
+          },
         }
       end
     end
 
   private
 
-    def change_path
+    def action_path
       if FeatureFlag.active?(:new_provider_user_flow)
         support_interface_edit_permissions_path(provider_user)
       else

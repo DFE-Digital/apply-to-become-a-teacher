@@ -5,35 +5,39 @@ RSpec.describe SummaryListComponent do
     rows = [
       key: 'Name:',
       value: 'Lando Calrissian',
-      action: 'Name',
-      change_path: '/some/url',
+      action: {
+        href: '/some/url',
+      },
     ]
     result = render_inline(SummaryListComponent.new(rows: rows))
 
     expect(result.css('.govuk-summary-list__key').text).to include('Name:')
     expect(result.css('.govuk-summary-list__value').text).to include('Lando Calrissian')
     expect(result.css('.govuk-summary-list__actions a').attr('href').value).to include('/some/url')
-    expect(result.css('.govuk-summary-list__actions').text).to include('Change Name')
+    expect(result.css('.govuk-summary-list__actions').text).to include('Change name')
   end
 
   it 'renders arrays content when passed in' do
     rows = [
       key: 'Address:',
       value: ['Whoa Drive', 'Wewvile', 'London'],
-      action: 'Name',
-      change_path: '/some/url',
+      action: {
+        href: '/some/url',
+      },
     ]
     result = render_inline(SummaryListComponent.new(rows: rows))
 
     expect(result.css('.govuk-summary-list__value').to_html).to include('Whoa Drive<br>Wewvile<br>London')
   end
 
-  it 'renders component with correct struture using action_path' do
+  it 'renders component with correct struture using action with text' do
     rows = [
       key: 'Please enter the sound a cat makes',
       value: 'Meow',
-      action: 'Enter cat sounds',
-      action_path: '/cat/sounds',
+      action: {
+        href: '/cat/sounds',
+        text: 'Enter cat sounds',
+      },
     ]
     result = render_inline(SummaryListComponent.new(rows: rows))
 
@@ -87,7 +91,7 @@ RSpec.describe SummaryListComponent do
               value: 'Cumque autem veritatis.' },
             { key: 'Dates',
               value: 'May 2003 - November 2019',
-              change_path: '#' }]
+              action: { href: '#' } }]
 
     result = render_inline(SummaryListComponent.new(rows: rows))
 

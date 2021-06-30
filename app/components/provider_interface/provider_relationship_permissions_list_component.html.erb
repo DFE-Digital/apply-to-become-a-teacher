@@ -20,7 +20,7 @@
         <% summary_list.row(
           key: row[:key],
           value: content_for(:value),
-          action: editable ? { href: row[:change_path], visually_hidden_text: row[:action] } : nil,
+          action: editable ? row[:action] : nil,
         ) %>
       <% end %>
     <% end %>

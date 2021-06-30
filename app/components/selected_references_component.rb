@@ -20,8 +20,9 @@ class SelectedReferencesComponent < ViewComponent::Base
       {
         key: 'Selected references',
         value: reference_values,
-        action: 'Change selected references',
-        change_path: candidate_interface_select_references_path,
+        action: {
+          href: candidate_interface_select_references_path,
+        },
       },
     ]
   end

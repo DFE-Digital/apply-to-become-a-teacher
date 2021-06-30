@@ -17,18 +17,9 @@ class SummaryListComponent < ViewComponent::Base
   end
 
   def action(row)
-    if row[:change_path]
-      {
-        href: row[:change_path],
-        visually_hidden_text: row[:action],
-        classes: 'govuk-!-display-none-print',
-      }
-    elsif row[:action_path]
-      {
-        href: row[:action_path],
-        text: row[:action],
-        classes: 'govuk-!-display-none-print',
-      }
+    if row[:action]
+      row[:action]['classes'] = 'govuk-!-display-none-print'
+      row[:action]
     end
   end
 

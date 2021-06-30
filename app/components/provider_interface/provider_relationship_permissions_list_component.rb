@@ -31,13 +31,15 @@ module ProviderInterface
       {
         key: "Who can #{permission_name}?",
         permission_slug: permission_name.parameterize.dasherize,
-        change_path: change_path(permission_name.parameterize),
         permissions_list: permissions_list(permission_name.parameterize.underscore),
-        action: "which organisations can #{permission_name} for courses run by #{training_provider.name} and ratified by #{ratifying_provider.name}",
+        action: {
+          href: action_path(permission_name.parameterize),
+          visually_hidden_text: "which organisations can #{permission_name} for courses run by #{training_provider.name} and ratified by #{ratifying_provider.name}",
+        },
       }
     end
 
-    def change_path(permissions_name)
+    def action_path(permissions_name)
       change_link_builder.change_link_for(permissions_model, permissions_name)
     end
 

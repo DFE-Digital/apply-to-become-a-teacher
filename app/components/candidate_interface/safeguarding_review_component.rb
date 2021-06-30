@@ -22,8 +22,10 @@ module CandidateInterface
       {
         key: 'Do you want to share any safeguarding issues?',
         value: @safeguarding.share_safeguarding_issues,
-        action: 'if you want to share any safeguarding issues',
-        change_path: candidate_interface_edit_safeguarding_path,
+        action: {
+          href: candidate_interface_edit_safeguarding_path,
+          visually_hidden_text: 'if you want to share any safeguarding issues',
+        },
       }
     end
 
@@ -33,8 +35,10 @@ module CandidateInterface
       {
         key: 'Relevant information',
         value: @safeguarding.safeguarding_issues || 'Not entered',
-        action: 'relevant information for safeguarding issues',
-        change_path: candidate_interface_edit_safeguarding_path,
+        action: {
+          href: candidate_interface_edit_safeguarding_path,
+          visually_hidden_text: 'relevant information for safeguarding issues',
+        },
       }
     end
   end

@@ -85,10 +85,10 @@ module CandidateInterface
       {
         key: 'Name',
         value: reference.name,
-        action: "name for #{reference.name}",
-        change_path: candidate_interface_references_edit_name_path(
-          reference.id, return_to: :review
-        ),
+        action: {
+          href: candidate_interface_references_edit_name_path(reference.id, return_to: :review),
+          visually_hidden_text: "name for #{reference.name}",
+        },
       }
     end
 
@@ -97,10 +97,10 @@ module CandidateInterface
         {
           key: 'Email address',
           value: reference.email_address,
-          action: "email address for #{reference.name}",
-          change_path: candidate_interface_references_edit_email_address_path(
-            reference.id, return_to: :review
-          ),
+          action: {
+            href: candidate_interface_references_edit_email_address_path(reference.id, return_to: :review),
+            visually_hidden_text: "email address for #{reference.name}",
+          },
         }
       else
         {
@@ -111,7 +111,6 @@ module CandidateInterface
               reference.id, return_to: :review
             ),
           ),
-          action: "email address for #{reference.name}",
         }
       end
     end
@@ -121,20 +120,20 @@ module CandidateInterface
         {
           key: 'Relationship to referee',
           value: reference.relationship,
-          action: "relationship for #{reference.name}",
-          change_path: candidate_interface_references_edit_relationship_path(
-            reference.id, return_to: :review
-          ),
+          action: {
+            href: candidate_interface_references_edit_relationship_path(reference.id, return_to: :review),
+            visually_hidden_text: "relationship for #{reference.name}",
+          },
         }
       else
         {
           key: 'Relationship to referee',
           value: govuk_link_to(
-            'Enter relationship to referee', candidate_interface_references_edit_relationship_path(
-                                               reference.id, return_to: :review
-                                             )
+            'Enter relationship to referee',
+            candidate_interface_references_edit_relationship_path(
+              reference.id, return_to: :review
+            ),
           ),
-          action: "relationship for #{reference.name}",
         }
       end
     end
@@ -143,10 +142,10 @@ module CandidateInterface
       {
         key: 'Reference type',
         value: formatted_reference_type(reference),
-        action: "reference type for #{reference.name}",
-        change_path: candidate_interface_references_edit_type_path(
-          reference.referee_type, reference.id, return_to: :review
-        ),
+        action: {
+          href: candidate_interface_references_edit_type_path(reference.referee_type, reference.id, return_to: :review),
+          visually_hidden_text: "reference type for #{reference.name}",
+        },
       }
     end
 
@@ -169,8 +168,10 @@ module CandidateInterface
 
       if can_send_reminder?(reference)
         row_attributes.merge!(
-          action: t('application_form.references.send_reminder.action'),
-          action_path: candidate_interface_references_new_reminder_path(reference),
+          action: {
+            href: candidate_interface_references_new_reminder_path(reference),
+            text: t('application_form.references.send_reminder.action'),
+          },
         )
       end
 

@@ -28,8 +28,10 @@ module CandidateInterface
       {
         key: t('application_form.personal_statement.interview_preferences.key'),
         value: preferences,
-        action: t('application_form.personal_statement.interview_preferences.change_action'),
-        change_path: candidate_interface_edit_interview_preferences_path,
+        action: {
+          href: candidate_interface_edit_interview_preferences_path,
+          visually_hidden_text: t('application_form.personal_statement.interview_preferences.change_action'),
+        },
       }
     end
   end

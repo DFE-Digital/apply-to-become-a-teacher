@@ -17,8 +17,9 @@ module SupportInterface
         {
           key: 'Email notifications',
           value: email_notifications_value,
-          action: 'notifications',
-          change_path: change_path,
+          action: {
+            href: action_path,
+          },
         },
         { key: 'Account created at', value: provider_user.created_at.to_s(:govuk_date_and_time) },
         { key: 'Last sign in at', value: provider_user.last_signed_in_at&.to_s(:govuk_date_and_time) || 'Not signed in yet' },
@@ -27,7 +28,7 @@ module SupportInterface
 
   private
 
-    def change_path
+    def action_path
       if FeatureFlag.active?(:new_provider_user_flow)
         support_interface_edit_permissions_path(provider_user)
       else

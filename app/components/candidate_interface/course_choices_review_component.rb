@@ -105,8 +105,10 @@ module CandidateInterface
       {
         key: 'Course',
         value: course_row_value(application_choice),
-        action: "course choice for #{application_choice.current_course.name_and_code}",
-        change_path: course_change_path(application_choice),
+        action: {
+          href: course_change_path(application_choice),
+          visually_hidden_text: "course choice for #{application_choice.current_course.name_and_code}",
+        },
       }
     end
 
@@ -122,15 +124,17 @@ module CandidateInterface
       {
         key: 'Location',
         value: "#{application_choice.current_site.name}\n#{application_choice.current_site.full_address}",
-        action: "location for #{application_choice.current_course.name_and_code}",
-        change_path: site_change_path(application_choice),
+        action: {
+          href: site_change_path(application_choice),
+          visually_hidden_text: "location for #{application_choice.current_course.name_and_code}",
+        },
       }
     end
 
     def study_mode_row(application_choice)
       return unless application_choice.current_course.full_time_or_part_time?
 
-      change_path = candidate_interface_course_choices_study_mode_path(
+      action_path = candidate_interface_course_choices_study_mode_path(
         application_choice.provider.id,
         application_choice.current_course.id,
         course_choice_id: application_choice.id,
@@ -139,8 +143,10 @@ module CandidateInterface
       {
         key: 'Full time or part time',
         value: application_choice.current_course_option.study_mode.humanize,
-        action: "study mode for #{application_choice.current_course.name_and_code}",
-        change_path: change_path,
+        action: {
+          href: action_path,
+          visually_hidden_text: "study mode for #{application_choice.current_course.name_and_code}",
+        },
       }
     end
 
