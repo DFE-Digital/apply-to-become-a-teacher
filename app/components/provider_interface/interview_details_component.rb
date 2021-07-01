@@ -44,8 +44,11 @@ module ProviderInterface
       {
         key: key,
         value: value,
-        action: key.downcase,
-        change_path: editable ? change_path(field) : nil,
+        action: (if editable
+                   {
+                     href: action_path(field),
+                   }
+                 end),
       }
     end
 
@@ -57,7 +60,7 @@ module ProviderInterface
       end
     end
 
-    def change_path(field)
+    def action_path(field)
       anchor_to = anchor_id(field)
       if @interview.present?
         edit_provider_interface_application_choice_interview_path(@interview_form.application_choice, @interview, anchor: anchor_to)

@@ -8,11 +8,11 @@
         <div class="app-masthead__description">
           <p class="govuk-body-l">Try our new service to see how easy it is to use. It’s free for providers and candidates.</p>
         </div>
-        <%= govuk_start_now_button(
-              text: 'Get started',
-              href: @pilot_enrolment_form_url,
-              classes: 'govuk-!-margin-bottom-0 app-button--inverted',
-            ) %>
+        <%= govuk_start_button(
+          text: 'Get started',
+          href: @pilot_enrolment_form_url,
+          classes: 'govuk-!-margin-bottom-0 app-button--inverted',
+        ) %>
         <span class="app-masthead__alternative-action">or <%= govuk_link_to 'sign in', provider_interface_sign_in_path %> if you’ve used it before</span>
       </div>
       <div class="govuk-grid-column-one-third">

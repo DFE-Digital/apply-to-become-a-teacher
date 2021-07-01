@@ -26,19 +26,19 @@ module CandidateInterface
       {
         key: t('application_form.contact_details.phone_number.label'),
         value: @contact_details_form.phone_number,
-        action: t('application_form.contact_details.phone_number.change_action'),
-        change_path: candidate_interface_edit_phone_number_path,
+        action: {
+          href: candidate_interface_edit_phone_number_path,
+        },
       }
     end
 
     def address_row
-      change_path = candidate_interface_edit_address_type_path
-
       {
         key: t('application_form.contact_details.full_address.label'),
         value: full_address,
-        action: t('application_form.contact_details.full_address.change_action'),
-        change_path: change_path,
+        action: {
+          href: candidate_interface_edit_address_type_path,
+        },
       }
     end
 

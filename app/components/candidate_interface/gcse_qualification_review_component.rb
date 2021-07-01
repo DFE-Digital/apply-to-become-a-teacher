@@ -53,8 +53,10 @@ module CandidateInterface
       {
         key: t('application_form.gcse.qualification.label'),
         value: gcse_qualification_types[application_qualification.qualification_type.to_sym.downcase],
-        action: "qualification for #{gcse_qualification_types[application_qualification.qualification_type.to_sym]}, #{subject}",
-        change_path: candidate_interface_gcse_details_edit_type_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_type_path(subject: subject),
+          visually_hidden_text: "qualification for #{gcse_qualification_types[application_qualification.qualification_type.to_sym]}, #{subject}",
+        },
       }
     end
 
@@ -62,8 +64,10 @@ module CandidateInterface
       {
         key: 'Year awarded',
         value: application_qualification.award_year || t('gcse_summary.not_specified'),
-        action: "year awarded for #{gcse_qualification_types[application_qualification.qualification_type.to_sym]}, #{subject}",
-        change_path: candidate_interface_gcse_details_edit_year_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_year_path(subject: subject),
+          visually_hidden_text: "year awarded for #{gcse_qualification_types[application_qualification.qualification_type.to_sym]}, #{subject}",
+        },
       }
     end
 
@@ -71,8 +75,10 @@ module CandidateInterface
       {
         key: 'Grade',
         value: present_grades || t('gcse_summary.not_specified'),
-        action: "grade for #{gcse_qualification_types[application_qualification.qualification_type.to_sym]}, #{subject}",
-        change_path: grade_edit_path,
+        action: {
+          href: grade_edit_path,
+          visually_hidden_text: "grade for #{gcse_qualification_types[application_qualification.qualification_type.to_sym]}, #{subject}",
+        },
       }
     end
 
@@ -82,8 +88,10 @@ module CandidateInterface
       {
         key: 'How I expect to gain this qualification',
         value: application_qualification.missing_explanation,
-        action: 'if you are working towards this qualification at grade 4 (C) or above, give us details',
-        change_path: candidate_interface_gcse_details_edit_grade_explanation_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_grade_explanation_path(subject: subject),
+          visually_hidden_text: 'if you are working towards this qualification at grade 4 (C) or above, give us details',
+        },
       }
     end
 
@@ -130,8 +138,10 @@ module CandidateInterface
       {
         key: 'How I expect to gain this qualification',
         value: application_qualification.missing_explanation.presence || t('gcse_summary.not_specified'),
-        action: 'how do you expect to gain this qualification',
-        change_path: candidate_interface_gcse_details_edit_type_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_type_path(subject: subject),
+          visually_hidden_text: 'how you expect to gain this qualification',
+        },
       }
     end
 
@@ -148,8 +158,10 @@ module CandidateInterface
       {
         key: 'Country',
         value: COUNTRIES[application_qualification.institution_country],
-        action: 'Change the country that you studied in',
-        change_path: candidate_interface_gcse_details_edit_institution_country_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_institution_country_path(subject: subject),
+          visually_hidden_text: 'the country that you studied in',
+        },
       }
     end
 
@@ -159,8 +171,10 @@ module CandidateInterface
       {
         key: t('application_form.gcse.enic_statement.review_label'),
         value: application_qualification.enic_reference ? 'Yes' : 'No',
-        action: t('application_form.gcse.enic_statement.change_action'),
-        change_path: candidate_interface_gcse_details_edit_enic_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_enic_path(subject: subject),
+          visually_hidden_text: t('application_form.gcse.enic_statement.change_action'),
+        },
       }
     end
 
@@ -171,8 +185,10 @@ module CandidateInterface
       {
         key: t('application_form.gcse.enic_reference.review_label'),
         value: application_qualification.enic_reference,
-        action: t('application_form.gcse.enic_reference.change_action'),
-        change_path: candidate_interface_gcse_details_edit_enic_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_enic_path(subject: subject),
+          visually_hidden_text: t('application_form.gcse.enic_reference.change_action'),
+        },
       }
     end
 
@@ -183,8 +199,10 @@ module CandidateInterface
       {
         key: t('application_form.gcse.comparable_uk_qualification.review_label'),
         value: application_qualification.comparable_uk_qualification,
-        action: t('application_form.gcse.comparable_uk_qualification.change_action'),
-        change_path: candidate_interface_gcse_details_edit_enic_path(subject: subject),
+        action: {
+          href: candidate_interface_gcse_details_edit_enic_path(subject: subject),
+          visually_hidden_text: t('application_form.gcse.comparable_uk_qualification.change_action'),
+        },
       }
     end
 

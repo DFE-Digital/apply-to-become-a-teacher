@@ -227,7 +227,7 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (~> 0.14)
-    govuk-components (1.2.0)
+    govuk-components (2.0.0b5)
       activemodel (>= 6.0)
       railties (>= 6.0)
       view_component (~> 2.20)
@@ -600,7 +600,7 @@ GEM
     validate_url (1.0.11)
       activemodel (>= 3.0.0)
       public_suffix
-    view_component (2.34.0)
+    view_component (2.31.1)
       activesupport (>= 5.0.0, < 7.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -689,7 +689,7 @@ DEPENDENCIES
   faker
   geocoder
   google-cloud-bigquery
-  govuk-components
+  govuk-components (= 2.0.0b5)
   govuk_design_system_formbuilder (~> 2.7.1)
   govuk_markdown
   guard-rspec

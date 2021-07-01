@@ -2,7 +2,7 @@
   <%= render(SummaryCardHeaderComponent.new(title: title, heading_level: @heading_level)) %>
 
   <div class="app-summary-card__body">
-    <%= govuk_summary_list do |component| %>
+    <%= govuk_summary_list do |summary_list| %>
       <% rows.each do |row| %>
         <% content_for :value, flush: true do %>
           <ul class="govuk-list <%= row[:permission_slug] %>">
@@ -11,23 +11,16 @@
             <% end %>
           </ul>
           <% if row[:permission_slug] == 'view-applications' %>
-            <%= govuk_details(summary: 'Why can’t this be changed?') do %>
+            <%= govuk_details(summary_text: 'Why can’t this be changed?') do %>
               All users at both organisations can view applications – you do not need to set permissions for this.
             <% end %>
           <% end %>
         <% end %>
 
-        <% content_for :action, flush: true do %>
-          <%= govuk_link_to(row[:change_path]) do %>
-            Change<span class="govuk-visually-hidden"> <%= row[:action] %></span>
-          <% end if row[:change_path] %>
-        <% end %>
-
-        <%= component.slot(
-          :row,
+        <% summary_list.row(
           key: row[:key],
           value: content_for(:value),
-          action: editable ? content_for(:action) : nil,
+          action: editable ? row[:action] : nil,
         ) %>
       <% end %>
     <% end %>

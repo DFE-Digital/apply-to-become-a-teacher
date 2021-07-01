@@ -42,8 +42,9 @@ module SupportInterface
       {
         key: 'First name',
         value: first_name,
-        action: 'first name',
-        change_path: support_interface_application_form_edit_applicant_details_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_applicant_details_path(application_form),
+        },
       }
     end
 
@@ -51,8 +52,9 @@ module SupportInterface
       {
         key: 'Last name',
         value: last_name,
-        action: 'last name',
-        change_path: support_interface_application_form_edit_applicant_details_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_applicant_details_path(application_form),
+        },
       }
     end
 
@@ -60,8 +62,9 @@ module SupportInterface
       {
         key: 'Email address',
         value: govuk_mail_to(email_address, email_address),
-        action: 'email address',
-        change_path: support_interface_application_form_edit_applicant_details_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_applicant_details_path(application_form),
+        },
       }
     end
 
@@ -69,8 +72,9 @@ module SupportInterface
       {
         key: 'Phone number',
         value: phone_number || MISSING,
-        action: 'phone number',
-        change_path: support_interface_application_form_edit_applicant_details_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_applicant_details_path(application_form),
+        },
       }
     end
 
@@ -78,8 +82,9 @@ module SupportInterface
       {
         key: 'Nationality',
         value: application_form.nationalities.to_sentence(last_word_connector: ' and '),
-        action: 'nationality',
-        change_path: support_interface_application_form_edit_nationalities_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_nationalities_path(application_form),
+        },
       }
     end
 
@@ -96,8 +101,10 @@ module SupportInterface
       {
         key: 'Has the right to work or study in the UK?',
         value: RIGHT_TO_WORK_OR_STUDY_DISPLAY_VALUES.fetch(application_form.right_to_work_or_study),
-        action: 'right to work or study',
-        change_path: support_interface_application_form_edit_right_to_work_or_study_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_right_to_work_or_study_path(application_form),
+          visually_hidden_text: 'right to work or study',
+        },
       }
     end
 
@@ -107,8 +114,9 @@ module SupportInterface
       {
         key: 'Residency details',
         value: application_form.right_to_work_or_study_details,
-        action: 'residency details',
-        change_path: support_interface_application_form_edit_right_to_work_or_study_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_right_to_work_or_study_path(application_form),
+        },
       }
     end
 
@@ -116,8 +124,9 @@ module SupportInterface
       {
         key: 'Date of birth',
         value: application_form.date_of_birth ? application_form.date_of_birth.to_s(:govuk_date) : MISSING,
-        action: 'date of birth',
-        change_path: support_interface_application_form_edit_applicant_details_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_applicant_details_path(application_form),
+        },
       }
     end
 
@@ -125,8 +134,9 @@ module SupportInterface
       {
         key: 'Address',
         value: full_address,
-        action: 'address',
-        change_path: support_interface_application_form_edit_address_type_path(application_form),
+        action: {
+          href: support_interface_application_form_edit_address_type_path(application_form),
+        },
       }
     end
 

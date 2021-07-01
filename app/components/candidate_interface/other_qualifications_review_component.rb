@@ -35,7 +35,9 @@ module CandidateInterface
       [{
         key: 'Do you want to add any A levels and other qualifications',
         value: 'No',
-        change_path: candidate_interface_other_qualification_type_path(change: true),
+        action: {
+          href: candidate_interface_other_qualification_type_path(change: true),
+        },
       }]
     end
 
@@ -47,8 +49,10 @@ module CandidateInterface
       {
         key: t('application_form.other_qualification.qualification.label'),
         value: qualification_value(qualification),
-        action: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.qualification.change_action')),
-        change_path: edit_other_qualification_type_path(qualification),
+        action: {
+          href: edit_other_qualification_type_path(qualification),
+          visually_hidden_text: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.qualification.change_action')),
+        },
       }
     end
 
@@ -66,8 +70,10 @@ module CandidateInterface
       {
         key: subject_set_key(qualification),
         value: rows_value(qualification.subject),
-        action: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.subject.change_action')),
-        change_path: edit_other_qualification_details_path(qualification),
+        action: {
+          href: edit_other_qualification_details_path(qualification),
+          visually_hidden_text: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.subject.change_action')),
+        },
       }
     end
 
@@ -83,8 +89,10 @@ module CandidateInterface
       {
         key: t('application_form.other_qualification.country.label'),
         value: country_value(qualification),
-        action: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.country.change_action')),
-        change_path: edit_other_qualification_details_path(qualification),
+        action: {
+          href: edit_other_qualification_details_path(qualification),
+          visually_hidden_text: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.country.change_action')),
+        },
       }
     end
 
@@ -104,8 +112,10 @@ module CandidateInterface
       {
         key: t('application_form.other_qualification.award_year.review_label'),
         value: rows_value(qualification.award_year),
-        action: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.award_year.change_action')),
-        change_path: edit_other_qualification_details_path(qualification),
+        action: {
+          href: edit_other_qualification_details_path(qualification),
+          visually_hidden_text: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.award_year.change_action')),
+        },
       }
     end
 
@@ -113,8 +123,10 @@ module CandidateInterface
       {
         key: grade_set_key(qualification),
         value: rows_value(qualification.grade),
-        action: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.grade.change_action')),
-        change_path: edit_other_qualification_details_path(qualification),
+        action: {
+          href: edit_other_qualification_details_path(qualification),
+          visually_hidden_text: generate_action(qualification: qualification, attribute: t('application_form.other_qualification.grade.change_action')),
+        },
       }
     end
 

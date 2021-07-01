@@ -5,8 +5,10 @@ module CandidateInterface
         {
           key: 'Have you done an English as a foreign language assessment?',
           value: value,
-          action: 'whether or not you have a qualification',
-          change_path: candidate_interface_english_foreign_language_edit_start_path,
+          action: {
+            href: candidate_interface_english_foreign_language_edit_start_path,
+            visually_hidden_text: 'whether or not you have a qualification',
+          },
         }
       end
 
@@ -14,8 +16,9 @@ module CandidateInterface
         {
           key: 'Type of assessment',
           value: name,
-          action: 'type of assessment',
-          change_path: candidate_interface_english_foreign_language_type_path,
+          action: {
+            href: candidate_interface_english_foreign_language_type_path,
+          },
         }
       end
     end
