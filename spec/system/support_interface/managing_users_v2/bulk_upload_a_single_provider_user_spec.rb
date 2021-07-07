@@ -6,7 +6,6 @@ RSpec.feature 'bulk upload provider users' do
 
   before do
     FeatureFlag.activate(:new_provider_user_flow)
-    FeatureFlag.activate(:interview_permissions)
   end
 
   scenario 'bulk upload a single provider user', with_audited: true do
