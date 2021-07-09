@@ -30,8 +30,8 @@ RSpec.feature 'Provider views organisation settings' do
     then_i_see_the_organisation_permissions
     and_the_breadcrumbs_are_correct_for_this_flow
 
-    when_i_click_on_an_organisation
-    then_i_see_the_organisations_permissions
+    # when_i_click_on_an_organisation
+    # then_i_see_the_organisations_permissions
   end
 
   def given_i_am_a_provider_user_with_dfe_sign_in
@@ -120,13 +120,13 @@ RSpec.feature 'Provider views organisation settings' do
 
   alias_method :and_the_breadcrumbs_are_correct_for_this_flow, :then_the_breadcrumbs_are_correct_for_this_flow
 
-  def when_i_click_on_an_organisation
-    click_on(@another_provider.name.to_s)
-  end
-
-  def then_i_see_the_organisations_permissions
-    expect(page).to have_content("#{@another_provider.name} and #{@example_provider.name}")
-  end
+  # def when_i_click_on_an_organisation
+  #   click_on(@another_provider.name.to_s)
+  # end
+  #
+  # def then_i_see_the_organisations_permissions
+  #   expect(page).to have_content("#{@another_provider.name} and #{@example_provider.name}")
+  # end
 
   def and_the_accredited_provider_setting_permissions_flag_is_inactive
     FeatureFlag.deactivate(:accredited_provider_setting_permissions)
