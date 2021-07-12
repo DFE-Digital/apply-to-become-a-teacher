@@ -1,35 +1,27 @@
 module ProviderInterface
   class OrganisationPermissionsController < ProviderInterfaceController
-    before_action :render_404_unless_permissions_found, except: :index
-    before_action :render_403_unless_access_permitted, except: :index
-    attr_reader :permissions_model
+    before_action :set_up_relationship_objects, except: %i[index show]
+    before_action :provider_id_and_permission_check, except: %i[index show]
 
+    # For now, list providers; next version will list relationships for a provider
     def index
       @manageable_providers = manageable_providers
     end
 
+    # This action will be dropped once #index lists relationships; :id is provider for now
     def show
       @provider = current_provider_user.providers.find(params[:id])
       @provider_relationships = ProviderRelationshipPermissions.all_relationships_for_providers([@provider])
     end
 
-    # per provider
-    def edit
-      @relationship = ProviderRelationshipPermissions.find(params[:id])
-      @provider = Provider.find(params[:provider_id])
-      @presenter = ProviderRelationshipPermissionAsProviderUserPresenter.new(@relationship, current_provider_user)
-    end
+    def edit; end
 
     def update
-      @permissions = permissions_params
-      @relationship = ProviderRelationshipPermissions.find(params[:id])
-
-      binding.pry
-
-      if @relationship.assign_attributes(new_relationship_permissions)
+      if @relationship.update(new_relationship_permissions)
         flash[:success] = 'Organisation permissions successfully updated'
         redirect_to provider_interface_organisation_settings_organisation_permission_path(Provider.find(params[:provider_id]))
       else
+        # FIXME: error tracking and error message links
         track_validation_error(@form)
         render :edit
       end
@@ -60,15 +52,18 @@ module ProviderInterface
       end
     end
 
-    def render_404_unless_permissions_found
-      @permissions_model ||= ProviderRelationshipPermissions.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render_404
+    def set_up_relationship_objects
+      @relationship = ProviderRelationshipPermissions.find(params[:id])
+      @provider = Provider.find(params[:provider_id])
+      @presenter = ProviderRelationshipPermissionAsProviderUserPresenter.new(@relationship, current_provider_user)
     end
 
-    def render_403_unless_access_permitted
-      render_403 unless ProviderAuthorisation.new(actor: current_provider_user)
-        .can_manage_organisation?(provider: permissions_model.training_provider)
+    def provider_id_and_permission_check
+      providers = [@relationship.training_provider, @relationship.ratifying_provider]
+      render_404 and return unless providers.include?(@provider)
+
+      auth = ProviderAuthorisation.new(actor: current_provider_user)
+      render_403 unless providers.map { |p| auth.can_manage_organisation?(provider: p) }.any?
     end
   end
 end
