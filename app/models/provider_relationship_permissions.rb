@@ -21,6 +21,12 @@ class ProviderRelationshipPermissions < ApplicationRecord
     PERMISSIONS.map { |permission| send("ratifying_provider_can_#{permission}") }.all?(false)
   end
 
+  PERMISSIONS.each do |name|
+    define_method(name) do
+      %w[training ratifying].select { |provider_type| send("#{provider_type}_provider_can_#{name}") }
+    end
+  end
+
 private
 
   def at_least_one_active_permission_in_pair
