@@ -11,7 +11,7 @@ module ProviderInterface
     # This action will be dropped once #index lists relationships; :id is provider for now
     def show
       @provider = current_provider_user.providers.find(params[:id])
-      @provider_relationships = ProviderRelationshipPermissions.all_relationships_for_providers([@provider])
+      @provider_relationships = ProviderRelationshipPermissions.all_relationships_for_providers([@provider]).where.not(setup_at: nil)
     end
 
     def edit; end
@@ -22,7 +22,7 @@ module ProviderInterface
         redirect_to provider_interface_organisation_settings_organisation_permission_path(Provider.find(params[:provider_id]))
       else
         # FIXME: error tracking and error message links
-        track_validation_error(@form)
+        track_validation_error(@relationship)
         render :edit
       end
     end
